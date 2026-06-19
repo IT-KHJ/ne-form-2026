@@ -10,15 +10,11 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif}
 .page{max-width:480px;margin:0 auto;background:#f4f4f4;min-height:100vh}
-
-/* 헤더 — 최상단 */
-.hero-top{background:#1D1717;padding:20px 18px 18px}
+.hero-top{background:#1D1717;padding:20px 18px 20px}
 .hero-tag{font-size:12px;font-weight:700;color:#E83828;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px}
 .hero-title{font-size:22px;font-weight:700;color:#fff;line-height:1.4;margin-bottom:8px}
 .hero-title span{color:#E83828}
 .hero-sub{font-size:14px;color:#CDCEC0;line-height:1.6}
-
-/* 슬라이더 */
 .slider-wrap{position:relative;background:#1D1717;overflow:hidden}
 .slides{display:flex;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1)}
 .slide{min-width:100%;aspect-ratio:16/9;position:relative;background:#000}
@@ -35,24 +31,10 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
 .arrow.left{left:10px}
 .arrow.right{right:10px}
 .arrow i{font-size:20px}
-
-/* 신청기간/발송안내 */
-.info-area{background:#1D1717;padding:16px 18px 22px;border-top:1px solid rgba(255,255,255,0.08)}
-.info-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
-.info-item:last-child{margin-bottom:0}
-.info-item i{font-size:18px;flex-shrink:0;margin-top:2px}
-.info-item.date i{color:#E83828}
-.info-item.ship i{color:#A0D2F2}
-.info-item span{font-size:14px;color:#CDCEC0;line-height:1.6}
-.info-item span strong{color:#fff;font-weight:700}
-
-/* 마감 바 */
 .deadline-bar{background:#E83828;padding:13px 18px;display:flex;align-items:center;gap:10px}
 .deadline-bar i{color:#fff;font-size:20px;flex-shrink:0}
 .deadline-text{font-size:14px;color:#fff;font-weight:500}
 .deadline-text strong{font-weight:700}
-
-/* 폼 */
 .form-area{padding:16px;display:flex;flex-direction:column;gap:12px;background:#f4f4f4}
 .section-label{font-size:13px;font-weight:700;color:#E83828;letter-spacing:0.06em;text-transform:uppercase;margin-top:6px}
 .field-card{background:#fff;border-radius:12px;border:1px solid #e8e8e8;padding:14px 16px}
@@ -63,8 +45,6 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
 .field-input:focus{border-color:#E83828;box-shadow:0 0 0 3px rgba(232,56,40,0.08)}
 textarea.field-input{resize:none;height:80px;line-height:1.5}
 .field-hint{font-size:12px;color:#aaa;margin-top:6px}
-
-/* 자료 선택 — 라디오 단일 선택 */
 .choice-card{background:#fff;border-radius:12px;border:1px solid #e8e8e8;padding:14px 16px}
 .choice-title{font-size:14px;color:#444;margin-bottom:4px;display:flex;align-items:center;gap:6px}
 .choice-title i{font-size:17px;color:#888}
@@ -78,31 +58,40 @@ textarea.field-input{resize:none;height:80px;line-height:1.5}
 .choice-item.on .choice-radio-dot{display:block}
 .choice-name{font-size:14px;font-weight:600;color:#1D1717;margin-bottom:3px}
 .choice-desc{font-size:12px;color:#888;line-height:1.4}
-
-/* 개인정보 */
 .privacy-box{background:#f8f8f8;border-radius:8px;padding:13px 15px;display:flex;gap:9px;border:1px solid #e8e8e8}
 .privacy-box i{font-size:17px;color:#aaa;flex-shrink:0;margin-top:1px}
 .privacy-text{font-size:12px;color:#888;line-height:1.7}
-
-/* 버튼 */
 .submit-btn{width:100%;padding:17px;background:#E83828;color:#fff;border:none;border-radius:12px;font-size:17px;font-weight:700;cursor:pointer;letter-spacing:-0.01em;margin-top:4px;-webkit-tap-highlight-color:transparent}
 .submit-btn:active{background:#c42e1e;transform:scale(0.98)}
+.footer{text-align:center;padding:20px 16px 36px;font-size:12px;color:#aaa;background:#f4f4f4}
 
-/* 푸터 */
-.footer{text-align:center;padding:20px 16px 36px;font-size:12px;color:#aaa;background:#f4f4f4;line-height:1.8}
+/* 완료 페이지 */
+.done-page{display:none;min-height:100vh;background:#f4f4f4;flex-direction:column}
+.done-page.show{display:flex}
+.done-top{background:#1D1717;padding:48px 24px 40px;text-align:center;flex-shrink:0}
+.done-icon{width:64px;height:64px;border-radius:50%;background:#E83828;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.done-icon i{font-size:32px;color:#fff}
+.done-title{font-size:22px;font-weight:700;color:#fff;line-height:1.4;margin-bottom:10px}
+.done-sub{font-size:14px;color:#CDCEC0;line-height:1.7}
+.done-sub strong{color:#fff;font-weight:700}
+.done-body{padding:24px 16px;flex:1}
+.done-card{background:#fff;border-radius:12px;border:1px solid #e8e8e8;padding:18px 16px;display:flex;gap:12px;align-items:flex-start}
+.done-card i{font-size:20px;color:#E83828;flex-shrink:0;margin-top:2px}
+.done-card-text{font-size:14px;color:#444;line-height:1.7}
+.done-card-text strong{color:#1D1717;font-weight:700}
+.done-footer{text-align:center;padding:16px 16px 36px;font-size:12px;color:#aaa}
 </style>
 </head>
 <body>
-<div class="page">
 
-  <!-- 헤더 텍스트 — 최상단 -->
+<!-- 신청 페이지 -->
+<div class="page" id="formPage">
   <div class="hero-top">
     <div class="hero-tag">Free Material</div>
     <div class="hero-title">엔이능률 영어 교과서<br><span>수업 지원 자료</span> 무료 신청</div>
     <div class="hero-sub">선생님의 수업을 위한 부가자료를 무료로 보내드립니다.</div>
   </div>
 
-  <!-- 영상 슬라이더 -->
   <div class="slider-wrap">
     <div class="slides" id="slides">
       <div class="slide">
@@ -128,56 +117,36 @@ textarea.field-input{resize:none;height:80px;line-height:1.5}
     </div>
   </div>
 
-  <!-- 신청기간 / 발송안내 -->
-  <div class="info-area">
-    <div class="info-item date">
-      <i class="ti ti-calendar-event"></i>
-      <span>신청 기간 <strong>2026년 7월 10일(목)</strong>까지</span>
-    </div>
-    <div class="info-item ship">
-      <i class="ti ti-package"></i>
-      <span><strong>7월 10일 이후</strong> 개별 연락 후 학교 주소로 발송해 드립니다.</span>
-    </div>
-  </div>
-
-  <!-- 마감 바 -->
   <div class="deadline-bar">
     <i class="ti ti-calendar-event"></i>
     <div class="deadline-text">신청 마감 <strong>2026년 7월 10일(목)</strong>까지</div>
   </div>
 
-  <!-- 폼 -->
   <div class="form-area">
     <div class="section-label">선생님 정보</div>
-
     <div class="field-card">
       <div class="field-label"><i class="ti ti-user"></i> 성함 <span class="req">*</span></div>
       <input class="field-input" type="text" placeholder="홍길동" id="f-name">
     </div>
-
     <div class="field-card">
       <div class="field-label"><i class="ti ti-building"></i> 학교명 <span class="req">*</span></div>
       <input class="field-input" type="text" placeholder="○○고등학교" id="f-school">
     </div>
-
     <div class="field-card">
       <div class="field-label"><i class="ti ti-device-mobile"></i> 연락처 <span class="req">*</span></div>
       <input class="field-input" type="tel" placeholder="010-0000-0000" id="f-tel">
       <div class="field-hint">자료 발송 전 개별 연락을 드립니다.</div>
     </div>
-
     <div class="field-card">
       <div class="field-label"><i class="ti ti-mail"></i> 이메일 주소 <span class="req">*</span></div>
       <input class="field-input" type="email" placeholder="teacher@school.kr" id="f-email">
     </div>
-
     <div class="field-card">
       <div class="field-label"><i class="ti ti-map-pin"></i> 학교 주소 <span class="req">*</span></div>
       <textarea class="field-input" placeholder="예: 서울특별시 강남구 ○○로 000, ○○고등학교 영어과" id="f-addr"></textarea>
     </div>
 
     <div class="section-label">신청 자료 선택</div>
-
     <div class="choice-card">
       <div class="choice-title"><i class="ti ti-books"></i> 받아보실 자료를 선택해 주세요. <span class="req">*</span></div>
       <div class="choice-hint">하나만 선택 가능합니다.</div>
@@ -203,9 +172,27 @@ textarea.field-input{resize:none;height:80px;line-height:1.5}
     </div>
 
     <button class="submit-btn" onclick="submitForm()">신청하기</button>
-
     <div class="footer">Copyright © NE Neungyule, Inc. All Rights Reserved</div>
   </div>
+</div>
+
+<!-- 완료 페이지 -->
+<div class="done-page" id="donePage">
+  <div class="done-top">
+    <div class="done-icon"><i class="ti ti-check"></i></div>
+    <div class="done-title">신청해 주셔서 감사합니다!</div>
+    <div class="done-sub">7월 10일 이후 개별 연락 드린 후<br>학교 주소로 발송해 드립니다.</div>
+  </div>
+  <div class="done-body">
+    <div class="done-card">
+      <i class="ti ti-package"></i>
+      <div class="done-card-text">
+        <strong>자료 발송 안내</strong><br>
+        신청 학교를 대상으로 7월 10일 이후 개별 연락 드린 후 학교 주소로 발송해 드립니다.
+      </div>
+    </div>
+  </div>
+  <div class="done-footer">Copyright © NE Neungyule, Inc. All Rights Reserved</div>
 </div>
 
 <script>
@@ -233,7 +220,9 @@ function submitForm(){
   var selected=document.querySelector('.choice-item.on');
   if(!name||!school||!tel||!email||!addr){alert('모든 항목을 입력해 주세요.');return;}
   if(!selected){alert('신청 자료를 선택해 주세요.');return;}
-  alert('신청이 완료되었습니다. 감사합니다!\n7월 10일 이후 개별 연락 드린 후 학교 주소로 발송해 드립니다.');
+  document.getElementById('formPage').style.display='none';
+  document.getElementById('donePage').classList.add('show');
+  window.scrollTo(0,0);
 }
 </script>
 </body>
