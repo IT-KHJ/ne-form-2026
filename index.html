@@ -52,10 +52,10 @@ textarea.field-input{resize:none;height:80px;line-height:1.5}
 .choice-item{display:flex;align-items:flex-start;gap:12px;padding:12px 13px;border-radius:8px;border:1px solid #e8e8e8;margin-bottom:8px;cursor:pointer;transition:all 0.15s;-webkit-tap-highlight-color:transparent}
 .choice-item:last-child{margin-bottom:0}
 .choice-item.on{border-color:#E83828;background:#FEF5F4}
-.choice-radio{width:22px;height:22px;border-radius:50%;border:1.5px solid #ccc;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
-.choice-item.on .choice-radio{border-color:#E83828}
-.choice-radio-dot{width:10px;height:10px;border-radius:50%;background:#E83828;display:none}
-.choice-item.on .choice-radio-dot{display:block}
+.choice-radio{width:22px;height:22px;border-radius:5px;border:1.5px solid #ccc;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.choice-item.on .choice-radio{border-color:#E83828;background:#E83828}
+.choice-radio-dot{width:14px;height:14px;display:none}
+.choice-item.on .choice-radio-dot{display:flex;align-items:center;justify-content:center}
 .choice-name{font-size:14px;font-weight:600;color:#1D1717;margin-bottom:3px}
 .choice-desc{font-size:12px;color:#888;line-height:1.4}
 .privacy-box{background:#f8f8f8;border-radius:8px;padding:13px 15px;display:flex;gap:9px;border:1px solid #e8e8e8}
@@ -81,6 +81,7 @@ textarea.field-input{resize:none;height:80px;line-height:1.5}
 .done-card-text strong{color:#1D1717;font-weight:700}
 .done-footer{text-align:center;padding:16px 16px 36px;font-size:12px;color:#aaa}
 </style>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 
@@ -130,7 +131,7 @@ textarea.field-input{resize:none;height:80px;line-height:1.5}
     </div>
     <div class="field-card">
       <div class="field-label"><i class="ti ti-building"></i> 학교명 <span class="req">*</span></div>
-      <input class="field-input" type="text" placeholder="○○고등학교" id="f-school">
+      <input class="field-input" type="text" placeholder="○○○고등학교" id="f-school">
     </div>
     <div class="field-card">
       <div class="field-label"><i class="ti ti-device-mobile"></i> 연락처 <span class="req">*</span></div>
@@ -143,22 +144,26 @@ textarea.field-input{resize:none;height:80px;line-height:1.5}
     </div>
     <div class="field-card">
       <div class="field-label"><i class="ti ti-map-pin"></i> 학교 주소 <span class="req">*</span></div>
-      <textarea class="field-input" placeholder="예: 서울특별시 강남구 ○○로 000, ○○고등학교 영어과" id="f-addr"></textarea>
+      <div style="display:flex;gap:8px;margin-bottom:8px">
+        <input class="field-input" type="text" placeholder="주소 검색" id="f-addr" readonly style="flex:1;cursor:pointer;background:#f8f8f8" onclick="searchAddr()">
+        <button type="button" onclick="searchAddr()" style="flex-shrink:0;padding:0 16px;background:#1D1717;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap">검색</button>
+      </div>
+      <input class="field-input" type="text" placeholder="상세 주소 입력 (예: 영어과, 3층)" id="f-addr-detail">
     </div>
 
     <div class="section-label">신청 자료 선택</div>
     <div class="choice-card">
       <div class="choice-title"><i class="ti ti-books"></i> 받아보실 자료를 선택해 주세요. <span class="req">*</span></div>
-      <div class="choice-hint">하나만 선택 가능합니다.</div>
+      <div class="choice-hint">중복 선택 가능합니다.</div>
       <div class="choice-item" onclick="selectChoice(this)" data-val="영어권문화자료집">
-        <div class="choice-radio"><div class="choice-radio-dot"></div></div>
+        <div class="choice-radio"><i class="ti ti-check" style="font-size:14px;color:#fff;display:none" class="chk-icon"></i></div>
         <div>
           <div class="choice-name">① 영어권문화자료집</div>
           <div class="choice-desc">본사 영어 교과서 단원 연계 문화 콘텐츠집</div>
         </div>
       </div>
       <div class="choice-item" onclick="selectChoice(this)" data-val="교과서별 부가자료 풀패키지">
-        <div class="choice-radio"><div class="choice-radio-dot"></div></div>
+        <div class="choice-radio"><i class="ti ti-check" style="font-size:14px;color:#fff;display:none" class="chk-icon"></i></div>
         <div>
           <div class="choice-name">② 교과서별 부가자료 풀패키지</div>
           <div class="choice-desc">단원별 수업 PPT, 활동지, 평가 자료 등</div>
@@ -200,8 +205,17 @@ function playSlide(idx){
   ov.classList.add('playing');
 }
 function selectChoice(el){
-  document.querySelectorAll('.choice-item').forEach(function(i){i.classList.remove('on');});
-  el.classList.add('on');
+  el.classList.toggle('on');
+  var icon=el.querySelector('.choice-radio i');
+  if(el.classList.contains('on')){
+    el.querySelector('.choice-radio').style.borderColor='#E83828';
+    el.querySelector('.choice-radio').style.background='#E83828';
+    if(icon) icon.style.display='block';
+  } else {
+    el.querySelector('.choice-radio').style.borderColor='#ccc';
+    el.querySelector('.choice-radio').style.background='transparent';
+    if(icon) icon.style.display='none';
+  }
 }
 function submitForm(){
   var name=document.getElementById('f-name').value.trim();
@@ -209,9 +223,9 @@ function submitForm(){
   var tel=document.getElementById('f-tel').value.trim();
   var email=document.getElementById('f-email').value.trim();
   var addr=document.getElementById('f-addr').value.trim();
-  var selected=document.querySelector('.choice-item.on');
+  var selected=document.querySelectorAll('.choice-item.on');
   if(!name||!school||!tel||!email||!addr){alert('모든 항목을 입력해 주세요.');return;}
-  if(!selected){alert('신청 자료를 선택해 주세요.');return;}
+  if(selected.length===0){alert('신청 자료를 선택해 주세요.');return;}
   document.getElementById('formPage').style.display='none';
   document.getElementById('donePage').classList.add('show');
   window.scrollTo(0,0);
@@ -223,6 +237,15 @@ document.getElementById('f-tel').addEventListener('input', function(e){
   else if(v.length<8) e.target.value=v.substring(0,3)+'-'+v.substring(3);
   else e.target.value=v.substring(0,3)+'-'+v.substring(3,7)+'-'+v.substring(7);
 });
+
+function searchAddr(){
+  new daum.Postcode({
+    oncomplete: function(data){
+      document.getElementById('f-addr').value = data.roadAddress || data.jibunAddress;
+      document.getElementById('f-addr-detail').focus();
+    }
+  }).open();
+}
 </script>
 </body>
 </html>
