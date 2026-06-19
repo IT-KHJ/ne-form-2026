@@ -241,21 +241,43 @@ function submitForm(){
   selected.forEach(function(el){
     params.append('entry.1118510385', el.getAttribute('data-val'));
   });
+  params.append('draftResponse', '[]');
+  params.append('pageHistory', '0');
+  params.append('fvv', '1');
+  params.append('fbzx', Math.floor(Math.random()*9e18).toString());
 
-  fetch(base, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: {'Content-Type':'application/x-www-form-urlencoded'},
-    body: params.toString()
-  }).then(function(){
-    document.getElementById('formPage').style.display='none';
-    document.getElementById('donePage').classList.add('show');
-    window.scrollTo(0,0);
-  }).catch(function(){
-    document.getElementById('formPage').style.display='none';
-    document.getElementById('donePage').classList.add('show');
-    window.scrollTo(0,0);
+  var iframe=document.getElementById('hidden-form-target');
+  if(!iframe){
+    iframe=document.createElement('iframe');
+    iframe.id='hidden-form-target';
+    iframe.name='hidden-form-target';
+    iframe.style.display='none';
+    document.body.appendChild(iframe);
+  }
+
+  var form=document.createElement('form');
+  form.method='POST';
+  form.action=base;
+  form.target='hidden-form-target';
+  form.style.display='none';
+
+  params.forEach(function(val, key){
+    var input=document.createElement('input');
+    input.type='hidden';
+    input.name=key;
+    input.value=val;
+    form.appendChild(input);
   });
+
+  document.body.appendChild(form);
+  form.submit();
+
+  setTimeout(function(){
+    document.body.removeChild(form);
+    document.getElementById('formPage').style.display='none';
+    document.getElementById('donePage').classList.add('show');
+    window.scrollTo(0,0);
+  }, 500);
 }
 
 document.getElementById('f-tel').addEventListener('input', function(e){
