@@ -223,12 +223,39 @@ function submitForm(){
   var tel=document.getElementById('f-tel').value.trim();
   var email=document.getElementById('f-email').value.trim();
   var addr=document.getElementById('f-addr').value.trim();
+  var addrDetail=document.getElementById('f-addr-detail').value.trim();
   var selected=document.querySelectorAll('.choice-item.on');
   if(!name||!school||!tel||!email||!addr){alert('모든 항목을 입력해 주세요.');return;}
   if(selected.length===0){alert('신청 자료를 선택해 주세요.');return;}
-  document.getElementById('formPage').style.display='none';
-  document.getElementById('donePage').classList.add('show');
-  window.scrollTo(0,0);
+
+  var fullAddr = addrDetail ? addr+' '+addrDetail : addr;
+  var FORM_ID='1FAIpQLSf6Hjws7DB6tsWhJjl-fbOcr-q6OwcBVh2mMrvi9OP3JCY_rw';
+  var base='https://docs.google.com/forms/d/e/'+FORM_ID+'/formResponse';
+
+  var params = new URLSearchParams();
+  params.append('entry.326968838', name);
+  params.append('entry.1007026459', school);
+  params.append('entry.1855800715', tel);
+  params.append('entry.1222924173', email);
+  params.append('entry.1142960706', fullAddr);
+  selected.forEach(function(el){
+    params.append('entry.1118510385', el.getAttribute('data-val'));
+  });
+
+  fetch(base, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type':'application/x-www-form-urlencoded'},
+    body: params.toString()
+  }).then(function(){
+    document.getElementById('formPage').style.display='none';
+    document.getElementById('donePage').classList.add('show');
+    window.scrollTo(0,0);
+  }).catch(function(){
+    document.getElementById('formPage').style.display='none';
+    document.getElementById('donePage').classList.add('show');
+    window.scrollTo(0,0);
+  });
 }
 
 document.getElementById('f-tel').addEventListener('input', function(e){
