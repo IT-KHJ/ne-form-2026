@@ -45,7 +45,7 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
 .field-input:focus{border-color:#E83828;box-shadow:0 0 0 3px rgba(232,56,40,0.08)}
 .field-input[readonly]{background:#f8f8f8;cursor:pointer}
 .field-hint{font-size:12px;color:#aaa;margin-top:6px}
-.addr-row{display:flex;gap:8px;margin-bottom:8px}
+.addr-row{display:flex;gap:8px;margin-bottom:2px}
 .addr-btn{flex-shrink:0;padding:0 16px;background:#1D1717;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
 .choice-card{background:#fff;border-radius:12px;border:1px solid #e8e8e8;padding:14px 16px}
 .choice-title{font-size:14px;color:#444;margin-bottom:4px;display:flex;align-items:center;gap:6px}
@@ -142,12 +142,12 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
 
     <div class="field-card">
       <div class="field-label"><i class="ti ti-user"></i> 성함 <span class="req">*</span></div>
-      <input class="field-input" type="text" placeholder="홍길동" id="f-name">
+      <input class="field-input" type="text" placeholder="김능률" id="f-name">
     </div>
 
     <div class="field-card">
       <div class="field-label"><i class="ti ti-building"></i> 학교명 <span class="req">*</span></div>
-      <input class="field-input" type="text" placeholder="○○○고등학교" id="f-school">
+      <input class="field-input" type="text" placeholder="OOO고등학교" id="f-school">
     </div>
 
     <div class="field-card">
@@ -167,6 +167,7 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
         <input class="field-input" type="text" placeholder="주소 검색" id="f-addr" readonly onclick="searchAddr()">
         <button class="addr-btn" onclick="searchAddr()">검색</button>
       </div>
+      <div class="field-hint" style="margin-top:2px;margin-bottom:8px">※ 도로명 주소로 검색해 주세요.</div>
       <input class="field-input" type="text" placeholder="상세 주소 입력 (예: 영어과, 3층)" id="f-addr-detail">
     </div>
 
