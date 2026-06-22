@@ -87,16 +87,18 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
   <div class="slider-wrap">
     <div class="slides" id="slides">
       <div class="slide">
-        <iframe id="yt0" src="https://www.youtube.com/embed/dQw4w9WgXcQ?mute=1&controls=0&modestbranding=1&rel=0" allowfullscreen title="영어권문화자료집 소개"></iframe>
-        <div class="slide-overlay" id="ov0" onclick="playSlide(0)">
-          <div class="play-btn"><i class="ti ti-player-play"></i></div>
+        <div class="slide-img" style="width:100%;aspect-ratio:16/9;background:#2a2a2a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+          <i class="ti ti-book-2" style="font-size:48px;color:#E83828;opacity:0.8"></i>
+          <div style="color:#fff;font-size:15px;font-weight:700">① 영어권문화자료집</div>
+          <div style="color:#CDCEC0;font-size:12px">이미지 교체 예정 (960×540px)</div>
         </div>
         <div class="slide-label">① 영어권문화자료집</div>
       </div>
       <div class="slide">
-        <iframe id="yt1" src="https://www.youtube.com/embed/dQw4w9WgXcQ?mute=1&controls=0&modestbranding=1&rel=0&start=10" allowfullscreen title="교과서별 부가자료 풀패키지 소개"></iframe>
-        <div class="slide-overlay" id="ov1" onclick="playSlide(1)">
-          <div class="play-btn"><i class="ti ti-player-play"></i></div>
+        <div class="slide-img" style="width:100%;aspect-ratio:16/9;background:#2a2a2a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+          <i class="ti ti-package" style="font-size:48px;color:#E83828;opacity:0.8"></i>
+          <div style="color:#fff;font-size:15px;font-weight:700">② 교과서별 부가자료 풀패키지</div>
+          <div style="color:#CDCEC0;font-size:12px">이미지 교체 예정 (960×540px)</div>
         </div>
         <div class="slide-label">② 교과서별 부가자료 풀패키지</div>
       </div>
@@ -115,6 +117,27 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
   </div>
 
   <div class="form-area">
+    <div class="section-label">신청 자료 선택</div>
+
+    <div class="choice-card">
+      <div class="choice-title"><i class="ti ti-books"></i> 받아보실 자료를 선택해 주세요. <span class="req">*</span></div>
+      <div class="choice-hint">중복 선택 가능합니다.</div>
+      <div class="choice-item" onclick="toggleChoice(this)" data-val="① 영어권문화자료집 📖 — 본사 영어 교과서 단원 연계 문화 콘텐츠집">
+        <div class="choice-box"></div>
+        <div>
+          <div class="choice-name">① 영어권문화자료집</div>
+          <div class="choice-desc">본사 영어 교과서 단원 연계 문화 콘텐츠집</div>
+        </div>
+      </div>
+      <div class="choice-item" onclick="toggleChoice(this)" data-val="② 교과서별 부가자료 풀패키지 🗂️ — 단원별 수업 PPT, 활동지, 평가 자료 등">
+        <div class="choice-box"></div>
+        <div>
+          <div class="choice-name">② 교과서별 부가자료 풀패키지</div>
+          <div class="choice-desc">단원별 수업 PPT, 활동지, 평가 자료 등</div>
+        </div>
+      </div>
+    </div>
+
     <div class="section-label">선생님 정보</div>
 
     <div class="field-card">
@@ -147,27 +170,6 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
       <input class="field-input" type="text" placeholder="상세 주소 입력 (예: 영어과, 3층)" id="f-addr-detail">
     </div>
 
-    <div class="section-label">신청 자료 선택</div>
-
-    <div class="choice-card">
-      <div class="choice-title"><i class="ti ti-books"></i> 받아보실 자료를 선택해 주세요. <span class="req">*</span></div>
-      <div class="choice-hint">중복 선택 가능합니다.</div>
-      <div class="choice-item" onclick="toggleChoice(this)" data-val="① 영어권문화자료집 📖 — 본사 영어 교과서 단원 연계 문화 콘텐츠집">
-        <div class="choice-box"></div>
-        <div>
-          <div class="choice-name">① 영어권문화자료집</div>
-          <div class="choice-desc">본사 영어 교과서 단원 연계 문화 콘텐츠집</div>
-        </div>
-      </div>
-      <div class="choice-item" onclick="toggleChoice(this)" data-val="② 교과서별 부가자료 풀패키지 🗂️ — 단원별 수업 PPT, 활동지, 평가 자료 등">
-        <div class="choice-box"></div>
-        <div>
-          <div class="choice-name">② 교과서별 부가자료 풀패키지</div>
-          <div class="choice-desc">단원별 수업 PPT, 활동지, 평가 자료 등</div>
-        </div>
-      </div>
-    </div>
-
     <div class="privacy-box">
       <i class="ti ti-lock"></i>
       <div class="privacy-text">수집된 개인정보는 자료 발송 목적으로만 이용 후 파기됩니다.</div>
@@ -198,12 +200,7 @@ function goTo(n){
   dotsEl.forEach(function(d,i){d.classList.toggle('active',i===cur);});
 }
 function move(d){goTo((cur+d+2)%2);}
-function playSlide(idx){
-  var ov=document.getElementById('ov'+idx);
-  var iframe=document.getElementById('yt'+idx);
-  if(iframe.src.indexOf('autoplay=1')===-1){iframe.src=iframe.src+'&autoplay=1';}
-  ov.classList.add('playing');
-}
+
 function toggleChoice(el){
   el.classList.toggle('on');
   var box=el.querySelector('.choice-box');
