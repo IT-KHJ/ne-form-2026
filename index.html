@@ -76,14 +76,14 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
 </style>
 </head>
 <body>
- 
+
 <div class="page" id="formPage">
   <div class="hero-top">
     <div class="hero-tag">Free Material</div>
     <div class="hero-title">엔이능률 영어 교과서<br><span>수업 지원 자료</span> 무료 신청</div>
     <div class="hero-sub">선생님의 수업을 위한 부가자료를 무료로 보내드립니다.</div>
   </div>
- 
+
   <div class="slider-wrap">
     <div class="slides" id="slides">
       <div class="slide">
@@ -110,15 +110,15 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
       <div class="dot" onclick="goTo(1)"></div>
     </div>
   </div>
- 
+
   <div class="deadline-bar">
     <i class="ti ti-calendar-event"></i>
     <div class="deadline-text">신청 마감 <strong>2026년 7월 10일(목)</strong>까지</div>
   </div>
- 
+
   <div class="form-area">
     <div class="section-label">신청 자료 선택</div>
- 
+
     <div class="choice-card">
       <div class="choice-title"><i class="ti ti-books"></i> 받아보실 자료를 선택해 주세요. <span class="req">*</span></div>
       <div class="choice-hint">중복 선택 가능합니다.</div>
@@ -137,30 +137,30 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
         </div>
       </div>
     </div>
- 
+
     <div class="section-label">선생님 정보</div>
- 
+
     <div class="field-card">
       <div class="field-label"><i class="ti ti-user"></i> 성함 <span class="req">*</span></div>
       <input class="field-input" type="text" placeholder="홍길동" id="f-name">
     </div>
- 
+
     <div class="field-card">
       <div class="field-label"><i class="ti ti-building"></i> 학교명 <span class="req">*</span></div>
       <input class="field-input" type="text" placeholder="○○○고등학교" id="f-school">
     </div>
- 
+
     <div class="field-card">
       <div class="field-label"><i class="ti ti-device-mobile"></i> 연락처 <span class="req">*</span></div>
       <input class="field-input" type="tel" placeholder="010-0000-0000" id="f-tel">
       <div class="field-hint">자료 발송 전 개별 연락을 드립니다.</div>
     </div>
- 
+
     <div class="field-card">
       <div class="field-label"><i class="ti ti-mail"></i> 이메일 주소 <span class="req">*</span></div>
       <input class="field-input" type="email" placeholder="teacher@school.kr" id="f-email">
     </div>
- 
+
     <div class="field-card">
       <div class="field-label"><i class="ti ti-map-pin"></i> 학교 주소 <span class="req">*</span></div>
       <div class="addr-row">
@@ -169,17 +169,17 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
       </div>
       <input class="field-input" type="text" placeholder="상세 주소 입력 (예: 영어과, 3층)" id="f-addr-detail">
     </div>
- 
+
     <div class="privacy-box">
       <i class="ti ti-lock"></i>
       <div class="privacy-text">수집된 개인정보는 자료 발송 목적으로만 이용 후 파기됩니다.</div>
     </div>
- 
+
     <button class="submit-btn" onclick="submitForm()">신청하기</button>
     <div class="footer">Copyright © NE Neungyule, Inc. All Rights Reserved</div>
   </div>
 </div>
- 
+
 <div class="done-page" id="donePage" style="display:none">
   <div class="done-top">
     <div class="done-icon"><i class="ti ti-check"></i></div>
@@ -188,19 +188,19 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
   </div>
   <div class="done-footer">Copyright © NE Neungyule, Inc. All Rights Reserved</div>
 </div>
- 
+
 <script>
 var cur=0;
 var slidesEl=document.getElementById('slides');
 var dotsEl=document.querySelectorAll('.dot');
- 
+
 function goTo(n){
   cur=n;
   slidesEl.style.transform='translateX(-'+(cur*100)+'%)';
   dotsEl.forEach(function(d,i){d.classList.toggle('active',i===cur);});
 }
 function move(d){goTo((cur+d+2)%2);}
- 
+
 function toggleChoice(el){
   el.classList.toggle('on');
   var box=el.querySelector('.choice-box');
@@ -268,10 +268,10 @@ function submitForm(){
   setTimeout(function(){
     document.getElementById('formPage').style.display='none';
     document.getElementById('donePage').classList.add('show');
+    document.getElementById('donePage').style.display='flex';
     window.scrollTo(0,0);
   },500);
 }
 </script>
 </body>
 </html>
- 
