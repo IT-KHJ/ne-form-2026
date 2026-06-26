@@ -85,19 +85,11 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
   <div class="slider-wrap">
     <div class="slides" id="slides">
       <div class="slide">
-        <div style="width:100%;aspect-ratio:16/9;background:#2a2a2a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
-          <i class="ti ti-book-2" style="font-size:48px;color:#E83828;opacity:0.8"></i>
-          <div style="color:#fff;font-size:15px;font-weight:700">① 영어권문화자료집</div>
-          <div style="color:#CDCEC0;font-size:12px">교과서 단원 연계 문화 콘텐츠 자료</div>
-        </div>
+        <img src="문화콘텐츠.png" alt="영어권문화자료집" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block">
         <div class="slide-label">① 영어권문화자료집</div>
       </div>
       <div class="slide">
-        <div style="width:100%;aspect-ratio:16/9;background:#2a2a2a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
-          <i class="ti ti-package" style="font-size:48px;color:#E83828;opacity:0.8"></i>
-          <div style="color:#fff;font-size:15px;font-weight:700">② 교과서별 부가자료 풀패키지</div>
-          <div style="color:#CDCEC0;font-size:12px">PPT · 활동지 · 평가 자료 등 수업 지원 자료</div>
-        </div>
+        <img src="부가자료.png" alt="교과서별 부가자료 풀패키지" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block">
         <div class="slide-label">② 교과서별 부가자료 풀패키지</div>
       </div>
     </div>
@@ -204,6 +196,15 @@ function goTo(n) {
   dotsEl.forEach(function(d, i) { d.classList.toggle('active', i === cur); });
 }
 function move(d) { goTo((cur + d + 2) % 2); }
+
+var touchStartX = 0;
+slidesEl.addEventListener('touchstart', function(e) {
+  touchStartX = e.touches[0].clientX;
+}, { passive: true });
+slidesEl.addEventListener('touchend', function(e) {
+  var diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 40) move(diff > 0 ? 1 : -1);
+}, { passive: true });
 
 function toggleChoice(el) {
   el.classList.toggle('on');
