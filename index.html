@@ -24,7 +24,7 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
 .dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10}
 .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;transition:all 0.2s}
 .dot.active{background:#E83828;width:22px;border-radius:4px}
-.arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(29,23,23,0.5);border:none;color:#fff;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);background:transparent;border:none;color:#fff;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10}
 .arrow.left{left:10px}
 .arrow.right{right:10px}
 .arrow i{font-size:20px}
@@ -93,8 +93,7 @@ html,body{width:100%;min-height:100vh;background:#f4f4f4;font-family:-apple-syst
         <div class="slide-label">② 교과서별 부가자료 풀패키지</div>
       </div>
     </div>
-    <button type="button" class="arrow left" onclick="move(-1)" aria-label="이전"><i class="ti ti-chevron-left"></i></button>
-    <button type="button" class="arrow right" onclick="move(1)" aria-label="다음"><i class="ti ti-chevron-right"></i></button>
+
     <div class="dots">
       <div class="dot active" onclick="goTo(0)"></div>
       <div class="dot" onclick="goTo(1)"></div>
@@ -198,13 +197,24 @@ function goTo(n) {
 function move(d) { goTo((cur + d + 2) % 2); }
 
 var touchStartX = 0;
+var autoTimer = setInterval(function() { move(1); }, 2000);
+
+function resetTimer() {
+  clearInterval(autoTimer);
+  autoTimer = setInterval(function() { move(1); }, 2000);
+}
+
 slidesEl.addEventListener('touchstart', function(e) {
   touchStartX = e.touches[0].clientX;
 }, { passive: true });
 slidesEl.addEventListener('touchend', function(e) {
   var diff = touchStartX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 40) move(diff > 0 ? 1 : -1);
+  if (Math.abs(diff) > 40) { move(diff > 0 ? 1 : -1); resetTimer(); }
 }, { passive: true });
+
+document.querySelectorAll('.arrow').forEach(function(btn) {
+  btn.addEventListener('click', resetTimer);
+});
 
 function toggleChoice(el) {
   el.classList.toggle('on');
