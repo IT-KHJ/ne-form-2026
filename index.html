@@ -281,48 +281,23 @@ function submitForm() {
   submitBtn.textContent = '신청 접수 중입니다...';
 
   var fullAddr = addrDetail ? addr + ' ' + addrDetail : addr;
-  var FORM_ID = '1FAIpQLSf6Hjws7DB6tsWhJjl-fbOcr-q6OwcBVh2mMrvi9OP3JCY_rw';
-  var base = 'https://docs.google.com/forms/d/e/' + FORM_ID + '/formResponse';
+  var materials = Array.from(selected).map(function(el) { return el.getAttribute('data-val'); }).join(', ');
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOjVkFDuHwcjxB1_sfwEwHjEwcF6bGwnoH3pIkuGg0NA9tmdZnTm4EuAc12b0LD1sl/exec';
 
-  var iframe = document.createElement('iframe');
-  iframe.name = 'hidden-frame';
-  iframe.style.display = 'none';
-  document.body.appendChild(iframe);
-
-  var form = document.createElement('form');
-  form.method = 'POST';
-  form.action = base;
-  form.target = 'hidden-frame';
-  form.style.display = 'none';
-
-  var fields = {
-    'entry.326968838': name,
-    'entry.1007026459': school,
-    'entry.1855800715': tel,
-    'entry.1222924173': email,
-    'entry.1142960706': fullAddr
-  };
-  Object.keys(fields).forEach(function(k) {
-    var inp = document.createElement('input');
-    inp.type = 'hidden'; inp.name = k; inp.value = fields[k];
-    form.appendChild(inp);
-  });
-  selected.forEach(function(el) {
-    var inp = document.createElement('input');
-    inp.type = 'hidden';
-    inp.name = 'entry.1118510385';
-    inp.value = el.getAttribute('data-val');
-    form.appendChild(inp);
-  });
-
-  document.body.appendChild(form);
-  form.submit();
-
-  setTimeout(function() {
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: JSON.stringify({ name: name, school: school, tel: tel, email: email, addr: fullAddr, materials: materials })
+  }).then(function() {
     document.getElementById('formPage').style.display = 'none';
     document.getElementById('donePage').style.display = 'flex';
     window.scrollTo(0, 0);
-  }, 500);
+  }).catch(function() {
+    alert('전송 중 오류가 발생했습니다. 다시 시도해 주세요.');
+    isSubmitting = false;
+    submitBtn.disabled = false;
+    submitBtn.textContent = '신청하기';
+  });
 }
 </script>
 </body>
